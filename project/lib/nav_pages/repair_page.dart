@@ -1,0 +1,840 @@
+// ignore_for_file: unused_import, unused_label
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:hover_menu/hover_menu.dart';
+
+//sayfalar
+import 'order_tracking_page.dart';
+import 'campaigns_page.dart';
+import 'the_one_page.dart';
+import 'services_page.dart';
+import 'package:project/main.dart';
+
+void main() {
+  runApp(const RepairPage());
+}
+
+class RepairPage extends StatelessWidget {
+  const RepairPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(children: const [BeymenNavBar(), RepairMain(),BeymenFooter()]),
+      ),
+    );
+  }
+}
+
+class CustomNavButton extends StatefulWidget {
+  final String label;
+  final VoidCallback onPressed;
+
+  const CustomNavButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
+
+  @override
+  State<CustomNavButton> createState() => _CustomNavButtonState();
+}
+
+class _CustomNavButtonState extends State<CustomNavButton> {
+  bool isHovering = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovering = true),
+      onExit: (_) => setState(() => isHovering = false),
+      child: TextButton(
+        onPressed: widget.onPressed,
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(Colors.transparent),
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          foregroundColor: WidgetStateProperty.all(Colors.black),
+        ),
+        child: Text(
+          widget.label,
+          style: TextStyle(
+            color: isHovering ? Colors.black87 : Colors.black,
+            decoration:
+                isHovering ? TextDecoration.underline : TextDecoration.none,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BeymenNavBar extends StatelessWidget {
+  const BeymenNavBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Üst Menü
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+          child: Row(
+            children: [
+              const Spacer(),
+              CustomNavButton(
+                label: "Repair",
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder:
+                          (context, animation1, animation2) =>
+                              const RepairPage(),
+                      transitionDuration: const Duration(milliseconds: 100),
+                    ),
+                  );
+                },
+              ),
+              CustomNavButton(
+                label: "Sipariş Takibi",
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder:
+                          (context, animation1, animation2) =>
+                              const OrderTrackingPage(),
+                      transitionDuration: const Duration(milliseconds: 100),
+                    ),
+                  );
+                },
+              ),
+              CustomNavButton(
+                label: "Kampanyalar",
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder:
+                          (context, animation1, animation2) =>
+                              const CampaignsPage(),
+                      transitionDuration: const Duration(milliseconds: 100),
+                    ),
+                  );
+                },
+              ),
+              CustomNavButton(
+                label: "The One",
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder:
+                          (context, animation1, animation2) =>
+                              const TheOnePage(),
+                      transitionDuration: const Duration(milliseconds: 100),
+                    ),
+                  );
+                },
+              ),
+              CustomNavButton(
+                label: "Servisler",
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder:
+                          (context, animation1, animation2) =>
+                              const ServicesPage(),
+                      transitionDuration: const Duration(milliseconds: 100),
+                    ),
+                  );
+                },
+              ),
+              const Icon(Icons.language, size: 18),
+              const SizedBox(width: 4),
+              const Text("TR"),
+            ],
+          ),
+        ),
+        const Divider(height: 1),
+        // Logo & Arama & İkonlar
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          child: Row(
+            children: [
+              // Logo Kısmı
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyApp(),
+                      ), // Hedef sayfan
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.lora().fontFamily,
+                          fontSize: 30,
+                          color: const Color.fromARGB(255, 11, 0, 220),
+                          fontWeight: FontWeight.w100,
+                        ),
+                        children: [
+                          const TextSpan(text: " B E Y M E N"),
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.middle,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 4, right: 4),
+                              child: Icon(
+                                Icons.circle,
+                                size: 30,
+                                color: const Color.fromARGB(255, 11, 0, 220),
+                              ),
+                            ),
+                          ),
+                          const TextSpan(text: "COM"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 30),
+              const Spacer(),
+              // Arama Çubuğu
+              Container(
+                width: 450,
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade400),
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Ürün, Marka Arayın",
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    suffixIcon: Icon(Icons.search, color: Colors.grey[700]),
+                  ),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: GoogleFonts.ptSans().fontFamily,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              // Hesabım İkonu
+              Column(
+                children: const [
+                  Icon(Icons.person_outline),
+                  SizedBox(height: 4),
+                  Text("Hesabım", style: TextStyle(fontSize: 12)),
+                ],
+              ),
+              const SizedBox(width: 20),
+              // Favorilerim İkonu
+              Column(
+                children: const [
+                  Icon(Icons.favorite_border),
+                  SizedBox(height: 4),
+                  Text("Favorilerim", style: TextStyle(fontSize: 12)),
+                ],
+              ),
+              const SizedBox(width: 20),
+              // Sepetim İkonu
+              Column(
+                children: const [
+                  Icon(Icons.shopping_bag_outlined),
+                  SizedBox(height: 4),
+                  Text("Sepetim", style: TextStyle(fontSize: 12)),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const Divider(height: 1),
+        // Kategoriler
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Kadın",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Erkek",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Kozmetik",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Ev & Yaşam",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Çocuk",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Anne & Bebek & Oyuncak",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Teknoloji",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Spor & Outdoor",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Outlet",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "Reborn",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Divider(height: 0.5),
+      ],
+    );
+  }
+}
+
+class RepairMain extends StatelessWidget {
+  const RepairMain({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            SizedBox(
+              height: screenHeight * 0.6,
+              child: Image.asset("img/repairPage/repair1.png"),
+            ),
+            SizedBox(height: screenHeight * 0.1),
+            SizedBox(
+              width: screenWidth * 0.8,
+              child: Image.asset("img/repairPage/repair2.png"),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 0, 138, 67),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 100,
+                  vertical: 20,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              child: Text(
+                "SİPARİŞ OLUŞTUR",
+                style: TextStyle(
+                  fontFamily: GoogleFonts.raleway().fontFamily,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "*İstanbul’da ikamet eden Beymen.com üyeleri, temiz.co’nun kapıdan teslim alım servisinden yararlanabilir.",
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Sıkça Sorulan Sorular",
+              style: TextStyle(
+                fontSize: 40,
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 40),
+
+            SizedBox(
+              height: screenHeight * 0.1,
+              width: screenWidth * 0.8,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Color.fromARGB(255, 0, 138, 67)),
+                  ),
+                  minimumSize: Size(screenWidth * 0.4, 60),
+                ),
+                onPressed: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Beymen Repair ve Hedeflerimize Dair',
+                        style: TextStyle(fontSize: 26, color: Colors.black, fontFamily: GoogleFonts.dmSans().fontFamily),
+                      ),
+                      Icon(Icons.chevron_right, color: Colors.black, size: 30),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+
+            SizedBox(
+              height: screenHeight * 0.1,
+              width: screenWidth * 0.8,
+              child: // İkinci buton
+                  ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Color.fromARGB(255, 0, 138, 67)),
+                  ),
+                  minimumSize: Size(screenWidth * 0.4, 60),
+                ),
+                onPressed: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Beymen Repair Servisleri Hakkında',
+                        style: TextStyle(fontSize: 26, color: Colors.black, fontFamily: GoogleFonts.dmSans().fontFamily), 
+                      ),
+                      Icon(Icons.chevron_right, color: Colors.black, size: 30),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 16),
+
+            SizedBox(
+              height: screenHeight * 0.1,
+              width: screenWidth * 0.8,
+              child: // Üçüncü buton
+                  ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Color.fromARGB(255, 0, 138, 67))
+                  ),
+                  minimumSize: Size(screenWidth * 0.4, 60),
+                ),
+                onPressed: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Beymen Repair Gönderim ve Teslimat Süreçleri Hakkında',
+                        style: TextStyle(fontSize: 26, color: Colors.black, fontFamily: GoogleFonts.dmSans().fontFamily),
+                      ),
+                      Icon(Icons.chevron_right, color: Colors.black, size: 30),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 16),
+
+            SizedBox(
+              height: screenHeight * 0.1, 
+              width: screenWidth * 0.8,
+              child: // Dördüncü buton
+                  ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Color.fromARGB(255, 0, 138, 67))
+                  ),
+                  minimumSize: Size(screenWidth * 0.4, 60),
+                ),
+                onPressed: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Beymen Repair Ödeme Süreçlerine Dair',
+                        style: TextStyle(fontSize: 26, color: Colors.black, fontFamily: GoogleFonts.dmSans().fontFamily),
+                      ),
+                      Icon(Icons.chevron_right, color: Colors.black, size: 30),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 100),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+//*******************************FOOTER*****************************
+ 
+class BeymenFooter extends StatelessWidget {
+  const BeymenFooter({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // ÜCRETSİZ KARGO
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildIconWithCircle(Icons.local_shipping),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildFooterTitle("ÜCRETSİZ KARGO", Colors.black),
+                          const SizedBox(height: 8),
+                          _buildFooterText(
+                              "2000 TL ve üzeri alışverişlerinizde kargo ücretsiz.", 
+                              Colors.black),
+                          _buildFooterText(
+                              "The One üyelerine ait limitsiz ücretsiz kargo ayrıcalığı.", 
+                              Colors.black),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 20),
+
+              // MAĞAZADAN TESLİM
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildIconWithCircle(Icons.store),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildFooterTitle("MAĞAZADAN TESLİM", Colors.black),
+                          const SizedBox(height: 8),
+                          _buildFooterText(
+                              "Online olarak satın aldığınız ürünleri mağazalarımızdan teslim alabilirsiniz.", 
+                              Colors.black),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 20),
+
+              // KOLAY İADE
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildIconWithCircle(Icons.assignment_return),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildFooterTitle("KOLAY İADE", Colors.black),
+                          const SizedBox(height: 8),
+                          _buildFooterText(
+                              "Beymen.com'dan satın aldığınız ürünleri kolayca iade edebilirsiniz.", 
+                              Colors.black),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        Container(
+          color: Colors.black,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Divider(height: 40, color: Colors.grey),
+
+              // Main footer content
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // BEYMEN HAKKINDA column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildFooterTitle("BEYMEN HAKKINDA", Colors.white),
+                        const SizedBox(height: 12),
+                        _buildFooterLink("Kariyer İş İlanları"),
+                        _buildFooterLink("The One Card"),
+                        _buildFooterLink("Özel Düğüm"),
+                        _buildFooterLink("Hediye Danışmanlığı"),
+                        _buildFooterLink("Beymen Private - Stil Danışmanlığı"),
+                        _buildFooterLink("Kurumsal Satış"),
+                        _buildFooterLink("Bilgi Toplumu Hizmetleri"),
+                      ],
+                    ),
+                  ),
+
+                  // MÜŞTERİ HİZMETLERİ column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildFooterTitle("MÜŞTERİ HİZMETLERİ", Colors.white),
+                        const SizedBox(height: 12),
+                        _buildFooterLink("Bize Ulaşın"),
+                        _buildFooterLink("Sıkça Sorulan Sorular"),
+                        _buildFooterLink("İşlem Rehberi"),
+                        _buildFooterLink("Ücretsiz Kargo ve İade"),
+                        _buildFooterLink("Mağazadan Teslim"),
+                        _buildFooterLink("Üyelik Sözleşmesi"),
+                        _buildFooterLink("Site Haritası"),
+                        _buildFooterLink("Kişisel Verilerin Korunması"),
+                      ],
+                    ),
+                  ),
+
+                  // HESABIM column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildFooterTitle("HESABIM", Colors.white),
+                        const SizedBox(height: 12),
+                        _buildFooterLink("Siparişlerim"),
+                        _buildFooterLink("Adreslerim"),
+                        _buildFooterLink("Üyelik Bilgilerim"),
+                        const SizedBox(height: 12),
+                        
+                        _buildFooterTitle("MAĞAZALAR", Colors.white),
+                        const SizedBox(height: 12),
+                        
+                        _buildFooterTitle("BEYMEN BLOG", Colors.white),
+                        const SizedBox(height: 12),
+                        
+                        _buildFooterTitle("BEYMEN MAGAZINE", Colors.white),
+                      ],
+                    ),
+                  ),
+
+                  // ÖZEL GÜNLER column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildFooterTitle("ÖZEL GÜNLER", Colors.white),
+                        const SizedBox(height: 12),
+                        _buildFooterLink("Yılbaşı"),
+                        _buildFooterLink("Sevgililer Günü"),
+                        _buildFooterLink("Anneler Günü"),
+                        _buildFooterLink("Babalar Günü"),
+                        _buildFooterLink("Nişan ve Düğün Elbiseleri"),
+                        _buildFooterLink("Mezuniyet ve Balo Elbiseleri"),
+                        _buildFooterLink("Dünya Kadınlar Günü"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              const Divider(height: 40, color: Colors.grey),
+
+              // İNSAN KAYNAKLARI section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildFooterTitle("İNSAN KAYNAKLARI", Colors.white),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 20,
+                    children: [
+                      _buildFooterLink("About Beymen"),
+                      _buildFooterLink("Satın Alma İş İlanları"),
+                      _buildFooterLink("Kampanya Koşulları"),
+                      _buildFooterLink("Mesafeli Satış Sözleşmesi"),
+                    ],
+                  ),
+                ],
+              ),
+
+              const Divider(height: 40, color: Colors.grey),
+
+              // Copyright text
+              Center(
+                child: _buildFooterText("© 2025 Beymen, Tüm Hakları Saklıdır", Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+    Widget _buildIconWithCircle(IconData icon) {
+    return Container(
+      width: 60,
+      height: 60,
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 36,
+      ),
+    );
+  }
+
+  Widget _buildFooterTitle(String text, Color color) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+
+  Widget _buildFooterText(String text, Color color) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 14,
+        color: color,
+      ),
+    );
+  }
+
+  Widget _buildFooterLink(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: InkWell(
+        onTap: () {},
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+            decoration: TextDecoration.underline,
+          ),
+        ),
+      ),
+    );
+  }
+}
