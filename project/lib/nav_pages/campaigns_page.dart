@@ -467,7 +467,8 @@ class _HoverableCampaignBoxState extends State<_HoverableCampaignBox> {
       onExit: (_) => _onHover(false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        alignment: Alignment.center,
         width: screenWidth < 1000 ? 100 : 250,
         height: 20,
         decoration: BoxDecoration(
@@ -479,7 +480,7 @@ class _HoverableCampaignBoxState extends State<_HoverableCampaignBox> {
           textAlign: TextAlign.center,
           style: TextStyle(
             color: _isHovered ? Colors.white : Colors.black,
-            fontSize: screenWidth < 600 ? 12 : 14,
+            fontSize: screenWidth < 1000 ? 12 : 14,
             fontWeight: FontWeight.w300,
             fontFamily: GoogleFonts.ptSans().fontFamily,
           ),
