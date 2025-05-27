@@ -22,7 +22,9 @@ class CampaignsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(children: const [BeymenNavBar(), CampaignsPageMain(), BeymenFooter()]),
+        child: Column(
+          children: const [BeymenNavBar(), CampaignsPageMain(), BeymenFooter()],
+        ),
       ),
     );
   }
@@ -75,6 +77,7 @@ class BeymenNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
         // Üst Menü
@@ -188,7 +191,7 @@ class BeymenNavBar extends StatelessWidget {
                       text: TextSpan(
                         style: TextStyle(
                           fontFamily: GoogleFonts.lora().fontFamily,
-                          fontSize: 30,
+                          fontSize: screenWidth < 1000 ? 20 : 30,
                           color: const Color.fromARGB(255, 11, 0, 220),
                           fontWeight: FontWeight.w100,
                         ),
@@ -200,7 +203,7 @@ class BeymenNavBar extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 4, right: 4),
                               child: Icon(
                                 Icons.circle,
-                                size: 30,
+                                size: screenWidth < 1000 ? 20 : 30,
                                 color: const Color.fromARGB(255, 11, 0, 220),
                               ),
                             ),
@@ -372,73 +375,72 @@ class BeymenNavBar extends StatelessWidget {
   }
 }
 
-
 //*******************************MAIN*****************************
 class CampaignsPageMain extends StatelessWidget {
   const CampaignsPageMain({super.key});
 
   @override
-Widget build(BuildContext context) {
-  final screenWidth = MediaQuery.of(context).size.width;
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
 
-  final List<String> campaignTexts = [
-    "Beymen Özel Markalarda 2 Ve Üzeri Ürüne %30 İndirim",
-    "Outlet Seçili 2 Ürün Ve Üzeri Alışverişlerinizde +%20 İndirim",
-    "PalZileri Markasının Seçili Ürünlerinde İndirim",
-    "Seçili Ayakkabı & Çanta Ürünlerinde Yaz Fırsatları",
-    "Seçili Beymen,Beymen Collection Ve Academia Markalı Ürünlerde İndirim",
-    "Seçili Ev & Mobilya Ürünlerinde Yaz Fırsatları",
-    "Seçili Giyim Ürünlerinde Yaz Fırsatları",
-    "Seçili Güneş Gözlüğü Tasarımlarında Sepette Fırsatlar",
-    "Seçili Inglesina Marka Ürünlerde Fırsatlar",
-    "Seçili Kol Saati Tasarımlarında Sepette Fırsatlar",
-    "Seçili Kozmetik Markalarında 2000 TL Üstü %25 İndirim",
-  ];
+    final List<String> campaignTexts = [
+      "Beymen Özel Markalarda 2 Ve Üzeri Ürüne %30 İndirim",
+      "Outlet Seçili 2 Ürün Ve Üzeri Alışverişlerinizde +%20 İndirim",
+      "PalZileri Markasının Seçili Ürünlerinde İndirim",
+      "Seçili Ayakkabı & Çanta Ürünlerinde Yaz Fırsatları",
+      "Seçili Beymen,Beymen Collection Ve Academia Markalı Ürünlerde İndirim",
+      "Seçili Ev & Mobilya Ürünlerinde Yaz Fırsatları",
+      "Seçili Giyim Ürünlerinde Yaz Fırsatları",
+      "Seçili Güneş Gözlüğü Tasarımlarında Sepette Fırsatlar",
+      "Seçili Inglesina Marka Ürünlerde Fırsatlar",
+      "Seçili Kol Saati Tasarımlarında Sepette Fırsatlar",
+      "Seçili Kozmetik Markalarında 2000 TL Üstü %25 İndirim",
+    ];
 
-  return SingleChildScrollView(
-    child: Column(
-      children: [
-        Row(
-          children: [
-            const Spacer(),
-            SizedBox(
-              width: screenWidth * 0.75,
-              child: Image.asset(
-                "img/kampanyalarPage/kamp.png",
-                fit: BoxFit.cover,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const Spacer(),
+              SizedBox(
+                width: screenWidth * 0.75,
+                child: Image.asset(
+                  "img/kampanyalarPage/kamp.png",
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            const Spacer(),
-          ],
-        ),
-        const SizedBox(height: 20),
-        
-        Row(
-  children: [
-    const SizedBox(width: 180.0), 
-    Expanded(
-      child: GridView.count(
-        physics: const NeverScrollableScrollPhysics(), 
-        shrinkWrap: true,
-        crossAxisCount: 2, 
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: 12, 
-        children: campaignTexts
-            .map((text) => _buildCampaignLink(text))
-            .toList(),
+              const Spacer(),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          Row(
+            children: [
+              const SizedBox(width: 180.0),
+              Expanded(
+                child: GridView.count(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 12,
+                  children:
+                      campaignTexts
+                          .map((text) => _buildCampaignLink(text))
+                          .toList(),
+                ),
+              ),
+              const SizedBox(width: 180.0),
+            ],
+          ),
+
+          const SizedBox(height: 40),
+        ],
       ),
-    ),
-    const SizedBox(width: 180.0), 
-  ],
-),
-
-        const SizedBox(height: 40),
-      ],
-    ),
-  );
-}
-
+    );
+  }
 
   Widget _buildCampaignLink(String text) {
     return _HoverableCampaignBox(text: text);
@@ -458,13 +460,15 @@ class _HoverableCampaignBoxState extends State<_HoverableCampaignBox> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        width: 250,
+        width: screenWidth < 1000 ? 100 : 250,
         height: 20,
         decoration: BoxDecoration(
           color: _isHovered ? Colors.black : Colors.white,
@@ -475,7 +479,7 @@ class _HoverableCampaignBoxState extends State<_HoverableCampaignBox> {
           textAlign: TextAlign.center,
           style: TextStyle(
             color: _isHovered ? Colors.white : Colors.black,
-            fontSize: 14,
+            fontSize: screenWidth < 600 ? 12 : 14,
             fontWeight: FontWeight.w300,
             fontFamily: GoogleFonts.ptSans().fontFamily,
           ),
@@ -491,14 +495,8 @@ class _HoverableCampaignBoxState extends State<_HoverableCampaignBox> {
   }
 }
 
-
-
-
-
-
-
 //*******************************FOOTER*****************************
- 
+
 class BeymenFooter extends StatelessWidget {
   const BeymenFooter({super.key});
 
@@ -526,11 +524,13 @@ class BeymenFooter extends StatelessWidget {
                           _buildFooterTitle("ÜCRETSİZ KARGO", Colors.black),
                           const SizedBox(height: 8),
                           _buildFooterText(
-                              "2000 TL ve üzeri alışverişlerinizde kargo ücretsiz.", 
-                              Colors.black),
+                            "2000 TL ve üzeri alışverişlerinizde kargo ücretsiz.",
+                            Colors.black,
+                          ),
                           _buildFooterText(
-                              "The One üyelerine ait limitsiz ücretsiz kargo ayrıcalığı.", 
-                              Colors.black),
+                            "The One üyelerine ait limitsiz ücretsiz kargo ayrıcalığı.",
+                            Colors.black,
+                          ),
                         ],
                       ),
                     ),
@@ -553,8 +553,9 @@ class BeymenFooter extends StatelessWidget {
                           _buildFooterTitle("MAĞAZADAN TESLİM", Colors.black),
                           const SizedBox(height: 8),
                           _buildFooterText(
-                              "Online olarak satın aldığınız ürünleri mağazalarımızdan teslim alabilirsiniz.", 
-                              Colors.black),
+                            "Online olarak satın aldığınız ürünleri mağazalarımızdan teslim alabilirsiniz.",
+                            Colors.black,
+                          ),
                         ],
                       ),
                     ),
@@ -577,8 +578,9 @@ class BeymenFooter extends StatelessWidget {
                           _buildFooterTitle("KOLAY İADE", Colors.black),
                           const SizedBox(height: 8),
                           _buildFooterText(
-                              "Beymen.com'dan satın aldığınız ürünleri kolayca iade edebilirsiniz.", 
-                              Colors.black),
+                            "Beymen.com'dan satın aldığınız ürünleri kolayca iade edebilirsiniz.",
+                            Colors.black,
+                          ),
                         ],
                       ),
                     ),
@@ -649,13 +651,13 @@ class BeymenFooter extends StatelessWidget {
                         _buildFooterLink("Adreslerim"),
                         _buildFooterLink("Üyelik Bilgilerim"),
                         const SizedBox(height: 12),
-                        
+
                         _buildFooterTitle("MAĞAZALAR", Colors.white),
                         const SizedBox(height: 12),
-                        
+
                         _buildFooterTitle("BEYMEN BLOG", Colors.white),
                         const SizedBox(height: 12),
-                        
+
                         _buildFooterTitle("BEYMEN MAGAZINE", Colors.white),
                       ],
                     ),
@@ -705,7 +707,10 @@ class BeymenFooter extends StatelessWidget {
 
               // Copyright text
               Center(
-                child: _buildFooterText("© 2025 Beymen, Tüm Hakları Saklıdır", Colors.white),
+                child: _buildFooterText(
+                  "© 2025 Beymen, Tüm Hakları Saklıdır",
+                  Colors.white,
+                ),
               ),
             ],
           ),
@@ -713,7 +718,8 @@ class BeymenFooter extends StatelessWidget {
       ],
     );
   }
-    Widget _buildIconWithCircle(IconData icon) {
+
+  Widget _buildIconWithCircle(IconData icon) {
     return Container(
       width: 60,
       height: 60,
@@ -721,33 +727,19 @@ class BeymenFooter extends StatelessWidget {
         color: Colors.black,
         shape: BoxShape.circle,
       ),
-      child: Icon(
-        icon,
-        color: Colors.white,
-        size: 36,
-      ),
+      child: Icon(icon, color: Colors.white, size: 36),
     );
   }
 
   Widget _buildFooterTitle(String text, Color color) {
     return Text(
       text,
-      style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: color,
-      ),
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color),
     );
   }
 
   Widget _buildFooterText(String text, Color color) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 14,
-        color: color,
-      ),
-    );
+    return Text(text, style: TextStyle(fontSize: 14, color: color));
   }
 
   Widget _buildFooterLink(String text) {

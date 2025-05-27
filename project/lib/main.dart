@@ -75,6 +75,7 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     final carouselHeight = screenHeight * 0.8;
 
     return SafeArea(
@@ -222,6 +223,9 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
           const Divider(height: 100, color: Colors.white),
 
           // Kadın ve Erkek Resimleri
+          if(screenWidth > 1000) ...[
+            
+          
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -230,16 +234,16 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                 imagePath: 'img/main/kadın.jpg',
                 title: 'HOUSE OF ART',
                 subtitle: 'Kadın',
-                width: 600,
-                height: 600,
+                width: screenWidth<1300 ?  screenWidth * 0.4 : 600,
+                height: screenWidth<1300 ? screenHeight * 0.6 : 600,
               ),
-              const SizedBox(width: 100),
+              SizedBox(width: screenWidth<1300 ? 50 : 100),
               ProductCard(
                 imagePath: 'img/main/erkek.jpg',
                 title: 'HOUSE OF ELEGANCE',
                 subtitle: 'Erkek',
-                width: 600,
-                height: 600,
+                width: screenWidth<1300 ? screenWidth * 0.4 : 600,
+                height: screenWidth<1300 ? screenHeight * 0.6 : 600,
               ),
               const Spacer(),
             ],
@@ -255,10 +259,10 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                 imagePath: 'img/main/sunum.jpg',
                 title: 'MİNİMAL SUNUMLAR',
                 subtitle: 'Sofra & Mutfak',
-                width: 400,
-                height: 500,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 500,
               ),
-              const SizedBox(width: 50),
+              SizedBox(width: screenWidth<1400 ? 40 : 100),
               Padding(
                 padding: const EdgeInsets.only(
                   top: 50,
@@ -267,17 +271,17 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                   imagePath: 'img/main/tekn.jpg',
                   title: 'KURTARICI GÜÇ',
                   subtitle: 'Küçük Ev Aletleri',
-                  width: 400,
-                  height: 400,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 400,
                 ),
               ),
-              const SizedBox(width: 50),
+              SizedBox(width: screenWidth<1400 ? 40 : 100),
               ProductCard(
                 imagePath: 'img/main/canta.jpg',
                 title: 'FARK YARATANLAR',
                 subtitle: 'Çanta',
-                width: 400,
-                height: 500,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 500,
               ),
               const Spacer(),
             ],
@@ -292,10 +296,10 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                 imagePath: 'img/main/parf.jpg',
                 title: 'TAZELEYİCİ NOTALAR',
                 subtitle: 'Parfüm',
-                width: 400,
-                height: 500,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 500,
               ),
-              const SizedBox(width: 50),
+              SizedBox(width: screenWidth<1400 ? 40 : 100),
               Padding(
                 padding: const EdgeInsets.only(
                   top: 50,
@@ -304,17 +308,17 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                   imagePath: 'img/main/gozl.jpg',
                   title: 'ANAHTAR PARÇA',
                   subtitle: 'Güneş Gözlüğü',
-                  width: 400,
-                  height: 400,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 400,
                 ),
               ),
-              const SizedBox(width: 50),
+              SizedBox(width: screenWidth<1400 ? 40 : 100),
               ProductCard(
                 imagePath: 'img/main/oyuncak.jpg',
                 title: 'Eğlence Zamanı',
                 subtitle: 'Oyuncak',
-                width: 400,
-                height: 500,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 500,
               ),
               const Spacer(),
             ],
@@ -328,10 +332,10 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                 imagePath: 'img/main/academia.gif',
                 title: 'RADARDA: BEYAZ',
                 subtitle: 'Academia',
-                width: 400,
-                height: 500,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 500,
               ),
-              const SizedBox(width: 50),
+              SizedBox(width: screenWidth<1400 ? 40 : 100),
               Padding(
                 padding: const EdgeInsets.only(
                   top: 50,
@@ -340,21 +344,116 @@ class _BeymenHomePageState extends State<BeymenHomePage> {
                   imagePath: 'img/main/sanalmakyaj.jpg',
                   title: 'İNOVATİF GÜZELLİK',
                   subtitle: 'Sanal Makyaj',
-                  width: 400,
-                  height: 400,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 400,
                 ),
               ),
-              const SizedBox(width: 50),
+              SizedBox(width: screenWidth<1400 ? 40 : 100),
               ProductCard(
                 imagePath: 'img/main/collect.gif',
                 title: 'RAFİNE ESTETİK',
                 subtitle: 'Collection',
-                width: 400,
-                height: 500,
+                width: screenWidth<1400 ? screenWidth * 0.3 : 400,
+                height: screenWidth<1400 ? screenHeight * 0.4 : 500,
               ),
               const Spacer(),
             ],
           ),
+          ] else ...[
+            // Ekran genişliği 1000'den küçükse tek sütunlu gösterim
+            Column(
+              children: [
+                ProductCard(
+                  imagePath: 'img/main/kadın.jpg',
+                  title: 'HOUSE OF ART',
+                  subtitle: 'Kadın',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/erkek.jpg',
+                  title: 'HOUSE OF ELEGANCE',
+                  subtitle: 'Erkek',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/sunum.jpg',
+                  title: 'MİNİMAL SUNUMLAR',
+                  subtitle: 'Sofra & Mutfak',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/tekn.jpg',
+                  title: 'KURTARICI GÜÇ',
+                  subtitle: 'Küçük Ev Aletleri',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/canta.jpg',
+                  title: 'FARK YARATANLAR',
+                  subtitle: 'Çanta',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/parf.jpg',
+                  title: 'TAZELEYİCİ NOTALAR',
+                  subtitle: 'Parfüm',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/gozl.jpg',
+                  title: 'ANAHTAR PARÇA',
+                  subtitle: 'Güneş Gözlüğü',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/oyuncak.jpg',
+                  title: 'Eğlence Zamanı',
+                  subtitle: 'Oyuncak',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/academia.gif',
+                  title: 'RADARDA: BEYAZ',
+                  subtitle: 'Academia',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/sanalmakyaj.jpg',
+                  title: 'İNOVATİF GÜZELLİK',
+                  subtitle: 'Sanal Makyaj',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+                ProductCard(
+                  imagePath: 'img/main/collect.gif',
+                  title: 'RAFİNE ESTETİK',
+                  subtitle: 'Collection',
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.6,
+                ),
+                const SizedBox(height: 50),
+              ],
+            ),
+          ],
 
           const Divider(height: 100, color: Colors.white),
           const Kampanyalar(),
@@ -468,6 +567,8 @@ class BeymenNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
         // Üst Menü
@@ -587,7 +688,7 @@ class BeymenNavBar extends StatelessWidget {
                       text: TextSpan(
                         style: TextStyle(
                           fontFamily: GoogleFonts.lora().fontFamily,
-                          fontSize: 30,
+                          fontSize: screenWidth < 1000 ? 20 : 30,
                           color: const Color.fromARGB(255, 11, 0, 220),
                           fontWeight: FontWeight.w100,
                         ),
@@ -599,7 +700,7 @@ class BeymenNavBar extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 4, right: 4),
                               child: Icon(
                                 Icons.circle,
-                                size: 30,
+                                size: screenWidth < 1000 ? 20 : 30,
                                 color: const Color.fromARGB(255, 11, 0, 220),
                               ),
                             ),
@@ -616,8 +717,8 @@ class BeymenNavBar extends StatelessWidget {
               const Spacer(),
               // Arama Çubuğu
               Container(
-                width: 450,
-                height: 40,
+                width: screenWidth < 1000 ? screenWidth * 0.5 : 450,
+                height: screenHeight < 1000 ? screenHeight * 0.05 : 40,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade400),
                 ),
@@ -639,31 +740,38 @@ class BeymenNavBar extends StatelessWidget {
               ),
               const Spacer(),
               // Hesabım İkonu
-              Column(
-                children: const [
-                  Icon(Icons.person_outline),
-                  SizedBox(height: 4),
-                  Text("Hesabım", style: TextStyle(fontSize: 12)),
-                ],
-              ),
-              const SizedBox(width: 20),
+              Row(
+                children: [
+                  if (screenWidth > 1000) ...[
+                    Column(
+                      children: const [
+                        Icon(Icons.person_outline),
+                        SizedBox(height: 4),
+                        Text("Hesabım", style: TextStyle(fontSize: 12)),
+                      ],
+                    ),
+                    const SizedBox(width: 20),
 
-              // Favorilerim İkonu
-              Column(
-                children: const [
-                  Icon(Icons.favorite_border),
-                  SizedBox(height: 4),
-                  Text("Favorilerim", style: TextStyle(fontSize: 12)),
-                ],
-              ),
-              const SizedBox(width: 20),
+                    // Favorilerim İkonu
+                    Column(
+                      children: const [
+                        Icon(Icons.favorite_border),
+                        SizedBox(height: 4),
+                        Text("Favorilerim", style: TextStyle(fontSize: 12)),
+                      ],
+                    ),
+                    const SizedBox(width: 20),
 
-              // Sepetim İkonu
-              Column(
-                children: const [
-                  Icon(Icons.shopping_bag_outlined),
-                  SizedBox(height: 4),
-                  Text("Sepetim", style: TextStyle(fontSize: 12)),
+                    // Sepetim İkonu
+                    Column(
+                      children: const [
+                        Icon(Icons.shopping_bag_outlined),
+                        SizedBox(height: 4),
+                        Text("Sepetim", style: TextStyle(fontSize: 12)),
+                      ],
+                    ),
+                  ],
+                  // Ekran dar ise buraya başka widgetlar ekleyebilirsin
                 ],
               ),
             ],

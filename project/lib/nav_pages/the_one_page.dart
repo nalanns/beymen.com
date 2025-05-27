@@ -88,6 +88,7 @@ class BeymenNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
         // Üst Menü
@@ -201,7 +202,7 @@ class BeymenNavBar extends StatelessWidget {
                       text: TextSpan(
                         style: TextStyle(
                           fontFamily: GoogleFonts.lora().fontFamily,
-                          fontSize: 30,
+                          fontSize: screenWidth < 1000 ? 20 : 30,
                           color: const Color.fromARGB(255, 11, 0, 220),
                           fontWeight: FontWeight.w100,
                         ),
@@ -213,7 +214,7 @@ class BeymenNavBar extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 4, right: 4),
                               child: Icon(
                                 Icons.circle,
-                                size: 30,
+                                size: screenWidth < 1000 ? 20 : 30,
                                 color: const Color.fromARGB(255, 11, 0, 220),
                               ),
                             ),
